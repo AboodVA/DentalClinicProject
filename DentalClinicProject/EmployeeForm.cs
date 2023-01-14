@@ -16,5 +16,29 @@ namespace DentalClinicProject
         {
             InitializeComponent();
         }
+
+        private void EmployeeForm_Load(object sender, EventArgs e)
+        {
+            label2.Text = "Employee name: " + Backend.currentLoggedEmployee.GetName();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            HomePageForm form = new HomePageForm();
+            this.Hide();
+            form.Show();
+            Backend.currentLoggedEmployee = null;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AddPatientsForm form = new AddPatientsForm();
+            form.Show();
+        }
     }
 }

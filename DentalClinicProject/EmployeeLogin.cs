@@ -35,7 +35,11 @@ namespace DentalClinicProject
 
             if (Backend.HandleUserLogin(textBox1.Text, textBox2.Text))
             {
-                MessageBox.Show("Welcome " + textBox1.Text);
+
+                this.Hide();
+                EmployeeForm form = new EmployeeForm();
+                form.Show();
+
             }else
             {
                 MessageBox.Show("Username / password is wrong");
