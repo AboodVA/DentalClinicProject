@@ -14,6 +14,7 @@ namespace DentalClinicProject
     public partial class AddPatientsForm : Form
     {
         static Regex validateEmailAddress = ValidateEmail();
+        static int num = 1;
 
         public AddPatientsForm()
         {
