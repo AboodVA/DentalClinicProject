@@ -18,6 +18,8 @@ namespace DentalClinicProject
         public AddPatientsForm()
         {
             InitializeComponent();
+            dateTimePicker1.MaxDate = DateTime.Now;
+            dateTimePicker1.MinDate = new DateTime(1800, 1, 1);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -41,7 +43,13 @@ namespace DentalClinicProject
 
             if (Backend.HandlePatientAdd(patient))
             {
+                textBox1.Text = "";
+                textBox2.Text = "";
+                radioButton1.Checked = false;
+                radioButton2.Checked = false;
+
                 MessageBox.Show("Patient Added sucessfully");
+                
             }
 
 
@@ -56,6 +64,14 @@ namespace DentalClinicProject
             return new Regex(pattern, RegexOptions.IgnoreCase);
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

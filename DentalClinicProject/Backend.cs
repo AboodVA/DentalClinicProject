@@ -90,6 +90,46 @@ namespace DentalClinicProject
             return false;
         }
 
+        public static List<Patient> FetchAllPatients()
+        {
+           
+            List<Patient> patients = new List<Patient>();
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(Path.Combine(folderPath, "patients.txt")))
+                {
+
+                    string line;
+                    while( (line = sr.ReadLine()) != null) 
+                    {
+                        string[] parts = line.Split(",");
+                        int id = int.Parse(parts[0]);
+                        string name = parts[1];
+                        string email = parts[2];
+                        string dateOfBirth = parts[3];
+                        string gender = parts[4];
+
+                        Patient patient = new Patient(name, email, dateOfBirth, gender);
+                        patient.SetID(id);
+
+                        patients.Add(patient);
+
+
+                    }
+
+
+                    return patients;
+
+                }
+            }catch(IOException e)
+            {
+                Console.WriteLine("Error occured while fetching patients " + e.Message);
+            }
+
+            return null;
+        }
+
 
         public static bool HandlePatientAdd(Patient patient)
         {
@@ -101,7 +141,7 @@ namespace DentalClinicProject
                 using (StreamWriter sw = new StreamWriter(Path.Combine(folderPath, "patients.txt"), true))
                 {
 
-                    string format = $"{id},{patient.GetName()},{patient.GetDateOfBirth()},{patient.GetGender()},{patient.GetNextAppointment()}";
+                    string format = $"{id},{patient.GetName()},{patient.GetEmail()},{patient.GetDateOfBirth()},{patient.GetGender()},{patient.GetNextAppointment()}";
 
                     sw.WriteLine(format);
                     return true;

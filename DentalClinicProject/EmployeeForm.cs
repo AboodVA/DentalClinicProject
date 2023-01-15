@@ -24,7 +24,8 @@ namespace DentalClinicProject
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            PatientListForm form = new PatientListForm();
+            form.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -39,6 +40,11 @@ namespace DentalClinicProject
         {
             AddPatientsForm form = new AddPatientsForm();
             form.Show();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

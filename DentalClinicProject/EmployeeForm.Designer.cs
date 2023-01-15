@@ -52,11 +52,12 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(46, 126);
+            this.label2.Location = new System.Drawing.Point(12, 115);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(155, 28);
             this.label2.TabIndex = 2;
             this.label2.Text = "Employee name:";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // button1
             // 
