@@ -51,7 +51,13 @@ namespace DentalClinicProject
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            if (listBox1.SelectedIndex == -1)
+            {
+                return;
+            }
+
             string patientData = listBox1.SelectedItem.ToString();
+           
             
             int patientID = int.Parse(patientData.Split(",")[0]);
             string name = patientData.Split(",")[1];

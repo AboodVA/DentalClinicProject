@@ -337,23 +337,20 @@ namespace DentalClinicProject
 
             try
             {
-                MessageBox.Show("Hi");
 
-                using(StreamReader sr = new StreamReader(Path.Combine(desktopPath,path)))
+                using(StreamReader sr = new StreamReader(Path.Combine(folderPath,path)))
                 {
                     string line;
                     while((line = sr.ReadLine()) != null)
                     {
-                        if (!(int.Parse(line.Split(",")[0]) ==  id))
+                        if (!line.Contains("" + id))
                         {
-                            MessageBox.Show("Inside for loop");
-
                             users.Add(line);
                         }
                     }
                 }
 
-                using (StreamWriter writer = new StreamWriter(Path.Combine(desktopPath, path)))
+                using (StreamWriter writer = new StreamWriter(Path.Combine(folderPath, path)))
                 {
                     foreach (string user in users)
                     {
@@ -366,6 +363,7 @@ namespace DentalClinicProject
             }catch(IOException e)
             {
                 Console.WriteLine("Error occured");
+                MessageBox.Show(e.Message);
                 return false;
             }
 
