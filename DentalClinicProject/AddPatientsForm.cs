@@ -24,6 +24,14 @@ namespace DentalClinicProject
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            if (!Backend.IsNameNotTaken(textBox1.Text, "patients.txt"))
+            {
+                MessageBox.Show("User name Taken.");
+                    return;
+            }
+
+
             if (textBox1.Text.Trim() == "" || textBox2.Text.Trim() == "" || dateTimePicker1.Value == null
                 || (!radioButton1.Checked) && !radioButton2.Checked)
             {

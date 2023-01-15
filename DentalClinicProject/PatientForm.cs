@@ -40,5 +40,11 @@ namespace DentalClinicProject
 
             label7.Text = "Next appointment: " + (Backend.currentSelectedPatient.GetNextAppointment() == null ? "No appointment" : Backend.currentSelectedPatient.GetNextAppointment());
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            BillingForm billingForm = new BillingForm();
+            billingForm.Show();
+        }
     }
 }

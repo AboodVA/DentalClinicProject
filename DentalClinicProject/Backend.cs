@@ -12,6 +12,7 @@ namespace DentalClinicProject
     {
 
         public static Employee currentLoggedEmployee;
+        public static Admin currentLoggedInAdmin;
         //       public static Patient currentSelectedPatient;
         public static Patient currentSelectedPatient;
 
@@ -131,6 +132,46 @@ namespace DentalClinicProject
             return null;
         }
 
+        public static List<Employee> FetchAllEmployees()
+        {
+
+            List<Employee> employees = new List<Employee>();
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(Path.Combine(folderPath, "employee.txt")))
+                {
+
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        string[] parts = line.Split(",");
+                        int id = int.Parse(parts[0]);
+                        string name = parts[1];
+                        string password = parts[2];
+                        string email = parts[3];
+
+                        Employee emp = new Employee(name, password, email);
+                        emp.SetID(id);
+
+                        employees.Add(emp);
+
+
+                    }
+
+
+                    return employees;
+
+                }
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("Error occured while fetching patients " + e.Message);
+            }
+
+            return null;
+        }
+
 
         public static bool HandlePatientAdd(Patient patient)
         {
@@ -154,7 +195,42 @@ namespace DentalClinicProject
 
             return false;
         }
-    
+
+
+        public static bool HandleAdminLogin(string userName, string passwrod)
+        {
+
+            string path = Path.Combine(folderPath, "admin.txt");
+
+            string line;
+
+            using (StreamReader sr = new StreamReader(path))
+            {
+                line = sr.ReadLine();
+
+                while (line != null)
+                {
+                    string[] parts = line.Split(",");
+
+                    if (parts[1] == userName && parts[2] == passwrod)
+                    {
+                        Admin admin = new Admin(parts[1], parts[2]);
+
+                        admin.ID = int.Parse(parts[0]);
+                        currentLoggedInAdmin = admin;
+
+                        return true;
+                    }
+
+                    line = sr.ReadLine();
+
+                }
+            }
+
+            return false;
+        }
+
+
 
         public static void HandleSelectedPatient(int id)
         {
@@ -217,6 +293,56 @@ namespace DentalClinicProject
             }
 
             return -1;
+
+        }
+
+        public static bool IsNameNotTaken(string name, string fileName)
+        {
+
+            try
+            {
+
+                string line;
+
+                using (StreamReader sr = new StreamReader(Path.Combine(folderPath, fileName)))
+                {
+
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        string storedName = line.Split(",")[1];
+                        Console.WriteLine(storedName);
+                        if (storedName == name)
+                        {
+                            return false;
+                        }
+                    }
+
+                    return true;
+
+                }
+            }catch(IOException e)
+            {
+                Console.WriteLine("Error occured");
+                return false;
+
+            }
+
+
+        }
+
+        public static bool HandleRemoveAccount(int id, string path)
+        {
+
+            try
+            {
+
+
+                return true;
+            }catch(IOException e)
+            {
+                Console.WriteLine("Error occured");
+                return false;
+            }
 
         }
 

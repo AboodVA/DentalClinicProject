@@ -32,6 +32,12 @@ namespace DentalClinicProject
         private void button1_Click(object sender, EventArgs e)
         {
 
+            if (!Backend.IsNameNotTaken(textBox2.Text, "employee.txt"))
+            {
+                MessageBox.Show("User name taken");
+                return;
+            }
+
             if (ValidateInputs())
             {
 
