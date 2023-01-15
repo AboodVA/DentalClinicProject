@@ -67,19 +67,28 @@ namespace DentalClinicProject
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /*string data = listBox1.SelectedItem.ToString();
-            MessageBox.Show(data);
+
+            string data;
+            try
+            {
+                 data = listBox1.SelectedItem.ToString();
+
+            }catch(Exception er)
+            {
+                return;
+            }
 
             int id = int.Parse(data.Split(",")[0]);
             string name = data.Split(",")[1];
-            */
+            
 
-            DialogResult result = MessageBox.Show("Sure you want to remove?: " +  "?", "Continue", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("Sure you want to remove?: " + name +  "?", "Continue", MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {
 
-              //  Backend.HandleRemoveAccount(id,"employee.txt");
+                Backend.HandleRemoveAccount(id,"patients.txt");
+                UpdateLists();
 
             }
             else if (result == DialogResult.No)

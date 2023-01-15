@@ -333,8 +333,33 @@ namespace DentalClinicProject
         public static bool HandleRemoveAccount(int id, string path)
         {
 
+            List<string> users = new List<string>();
+
             try
             {
+                MessageBox.Show("Hi");
+
+                using(StreamReader sr = new StreamReader(Path.Combine(desktopPath,path)))
+                {
+                    string line;
+                    while((line = sr.ReadLine()) != null)
+                    {
+                        if (!(int.Parse(line.Split(",")[0]) ==  id))
+                        {
+                            MessageBox.Show("Inside for loop");
+
+                            users.Add(line);
+                        }
+                    }
+                }
+
+                using (StreamWriter writer = new StreamWriter(Path.Combine(desktopPath, path)))
+                {
+                    foreach (string user in users)
+                    {
+                        writer.WriteLine(user);
+                    }
+                }
 
 
                 return true;
