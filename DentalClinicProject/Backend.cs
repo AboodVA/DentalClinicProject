@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Collections.Specialized;
 
 namespace DentalClinicProject
 {
@@ -11,7 +12,7 @@ namespace DentalClinicProject
     {
 
         public static Employee currentLoggedEmployee;
- //       public static Patient currentSelectedPatient;
+        //       public static Patient currentSelectedPatient;
 
         private static string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         private static string folderPath = Path.Combine(desktopPath, "DentalClinic");
@@ -30,11 +31,11 @@ namespace DentalClinicProject
 
 
                 if (id < 0)
-            {
-                return false;
-            }
+                {
+                    return false;
+                }
 
-            
+
                 using (sw)
                 {
 
@@ -44,12 +45,12 @@ namespace DentalClinicProject
 
                     return true;
                 }
-            }catch(Exception ex)
+            } catch (Exception ex)
             {
                 Console.WriteLine("Error occured while writing user data to file");
                 return false;
             }
-            
+
 
             return false;
 
@@ -64,11 +65,11 @@ namespace DentalClinicProject
 
             string line;
 
-            using(StreamReader sr = new StreamReader(path))
+            using (StreamReader sr = new StreamReader(path))
             {
                 line = sr.ReadLine();
 
-                while(line != null)
+                while (line != null)
                 {
                     string[] parts = line.Split(",");
 
@@ -77,7 +78,7 @@ namespace DentalClinicProject
                         Employee emp = new Employee(parts[1], parts[2], parts[3]);
                         emp.SetID(int.Parse(parts[0]));
                         currentLoggedEmployee = emp;
-                        
+
                         return true;
                     }
 
@@ -88,6 +89,31 @@ namespace DentalClinicProject
 
             return false;
         }
+
+
+        public static bool HandlePatientAdd(Patient patient)
+        {
+
+            int id = GetAndUpdateNextID();
+
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(Path.Combine(folderPath, "patients.txt"), true))
+                {
+
+                    string format = $"{id},{patient.GetName()},{patient.GetDateOfBirth()},{patient.GetGender()},{patient.GetNextAppointment()}";
+
+                    sw.WriteLine(format);
+                    return true;
+                }
+            } catch (IOException e)
+            {
+                MessageBox.Show("Error Occured while adding patients\n" + e.Message);
+            }
+
+            return false;
+        }
+    
        
         private static int GetAndUpdateNextID()
         {

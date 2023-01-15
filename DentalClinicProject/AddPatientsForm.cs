@@ -14,7 +14,6 @@ namespace DentalClinicProject
     public partial class AddPatientsForm : Form
     {
         static Regex validateEmailAddress = ValidateEmail();
-        static int num = 1;
 
         public AddPatientsForm()
         {
@@ -38,6 +37,12 @@ namespace DentalClinicProject
             }
 
 
+            Patient patient = new Patient(textBox1.Text, textBox2.Text, dateTimePicker1.Text, radioButton1.Checked ? "F" : "M");
+
+            if (Backend.HandlePatientAdd(patient))
+            {
+                MessageBox.Show("Patient Added sucessfully");
+            }
 
 
         }
