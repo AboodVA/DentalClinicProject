@@ -66,6 +66,8 @@ namespace DentalClinicProject
 
         private void button2_Click(object sender, EventArgs e)
         {
+            EmployeeForm form = new EmployeeForm();
+            form.Show();
             this.Close();
         }
 

@@ -13,6 +13,7 @@ namespace DentalClinicProject
 
         public static Employee currentLoggedEmployee;
         //       public static Patient currentSelectedPatient;
+        public static Patient currentSelectedPatient;
 
         private static string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         private static string folderPath = Path.Combine(desktopPath, "DentalClinic");
@@ -154,6 +155,38 @@ namespace DentalClinicProject
             return false;
         }
     
+
+        public static void HandleSelectedPatient(int id)
+        {
+
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(Path.Combine(folderPath, "patients.txt")))
+                {
+                    string line;
+                    while((line = sr.ReadLine()) != null)
+                    {
+                        string[] parts = line.Split(",");
+                        int storedID = int.Parse(parts[0]);
+
+                        if (storedID == id)
+                        {
+                            Patient patient = new Patient(parts[1], parts[2], parts[3], parts[4]);
+                            patient.SetID(id);
+                            currentSelectedPatient = patient;
+                            return;
+                        }
+ 
+
+                    }
+
+                }
+            }catch(IOException e)
+            {
+                Console.WriteLine("Error occured !");
+            }
+        }
        
         private static int GetAndUpdateNextID()
         {
@@ -186,6 +219,8 @@ namespace DentalClinicProject
             return -1;
 
         }
+
+
 
     }
 }

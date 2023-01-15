@@ -31,7 +31,7 @@ namespace DentalClinicProject
                 TimeSpan span = DateTime.Now - birth;
                 int ageYears = (int)span.TotalDays / 365;
 
-                listBox1.Items.Add($"id: {patients[i].GetID()}, {patients[i].GetName()}, {ageYears} Years old");
+                listBox1.Items.Add($"{patients[i].GetID()},{patients[i].GetName()},{ageYears} Years old");
             }
 
         }
@@ -43,7 +43,37 @@ namespace DentalClinicProject
 
         private void button2_Click(object sender, EventArgs e)
         {
+            EmployeeForm form = new EmployeeForm();
+            form.Show();
             this.Close();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            string patientData = listBox1.SelectedItem.ToString();
+            
+            int patientID = int.Parse(patientData.Split(",")[0]);
+            string name = patientData.Split(",")[1];
+
+            DialogResult result =  MessageBox.Show("Want to view patient: " + name + "?", "Continue", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+
+                Backend.HandleSelectedPatient(patientID);
+
+                PatientForm form = new PatientForm();
+                form.Show();
+                
+
+
+            }
+            else if (result == DialogResult.No)
+            {
+                return;
+            }
+
         }
     }
 }

@@ -32,6 +32,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -66,6 +67,7 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(511, 326);
             this.listBox1.TabIndex = 4;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // button2
             // 
@@ -77,9 +79,20 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(162, 71);
             this.button2.TabIndex = 5;
-            this.button2.Text = "Close";
+            this.button2.Text = "<- Go Back";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(910, 270);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(97, 32);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Patients";
             // 
             // PatientListForm
             // 
@@ -87,6 +100,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::DentalClinicProject.Properties.Resources.be_a_denist;
             this.ClientSize = new System.Drawing.Size(1272, 704);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label2);
@@ -105,5 +119,6 @@
         private Label label2;
         private ListBox listBox1;
         private Button button2;
+        private Label label3;
     }
 }
